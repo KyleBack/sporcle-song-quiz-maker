@@ -1,0 +1,52 @@
+<div class="medium-margin">
+
+  <div class="search-controls-container">
+    <!-- Song Title Search Bar -->
+    <mat-form-field class="search-input-container" subscriptSizing="dynamic">
+      <mat-label>Song Title</mat-label>
+      <input class="search-input" matInput type="text" placeholder="Ex. Party in the USA - Miley Cyrus"
+             spellcheck="false" [formControl]="searchQueryInput" (keyup.enter)="handleSearch()">
+
+      <!-- Submit Button -->
+      <button class="search-button" mat-icon-button matSuffix color="primary" type='button' (click)="handleSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
+
+      <!-- Clear Button -->
+      <button class="clear-button" mat-icon-button matSuffix color="primary" (click)="handleClear()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  @if (songSearchService.youtubeVideosListResponse(); as listResponse) {
+    <!-- Search Results -->
+    <mat-list class="search-result-list" role="list">
+      @for (video of listResponse.items | slice:getStartIndexOfPage():getEndIndexOfPage();
+        track video.player.embedHtml; let index = $index; let count = $count) {
+        <!-- Search Result Item -->
+        <mat-list-item class="search-result-list-item" role="listitem">
+          <div [innerHTML]="video.player.embedHtml | sanitizeHtml"></div>
+        </mat-list-item>
+
+        @if (index < count - 1) {
+          <mat-divider/>
+        }
+      }
+    </mat-list>
+
+    <!-- Paginator -->
+    <mat-paginator [length]="listResponse.pageInfo.totalResults" [pageSize]="resultsPerPage"
+                   [pageSizeOptions]="resultsPerPageOptions" (page)="handlePageEvent($event)"
+                   aria-label="Select page"/>
+
+  } @else if (searchButtonClicked) {
+    <!-- Loading indicator -->
+    <div class="search-result-list centered" role="list">
+      <mat-spinner/>
+    </div>
+  }
+
+</div>
+
+

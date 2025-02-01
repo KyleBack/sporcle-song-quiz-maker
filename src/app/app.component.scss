@@ -1,0 +1,19 @@
+.app-banner {
+  width: 100vw;
+  height: 10vh;
+  background-color: darkorange;
+}
+
+.title {
+  height: 100%;
+  padding-left: 2rem;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.router-content {
+  width: 100vw;
+  height: 90vh;
+}
