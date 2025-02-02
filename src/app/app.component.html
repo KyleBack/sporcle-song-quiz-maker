@@ -2,5 +2,18 @@
   <div class="title"> Sporcle Song Quiz Maker </div>
 </div>
 
-<router-outlet class="router-content"/>
+<mat-stepper class="stepper" labelPosition="end" (selectionChange)="handleStepChange($event)">
+  <mat-step [label]="SEARCH_LABEL">
+    <app-song-search/>
+  </mat-step>
+  <mat-step [label]="TRIM_LABEL">
+    <app-song-trim/>
+  </mat-step>
+  <mat-step [label]="UPLOAD_LABEL">
+    <app-song-upload/>
+  </mat-step>
+</mat-stepper>
+
+
+
 
