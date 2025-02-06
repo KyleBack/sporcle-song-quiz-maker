@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { YoutubeSearchListResponse } from "../shared/models/youtube.search.list.response.model";
+import { YoutubeSearchListResponse, YoutubeSearchResource } from "../shared/models/youtube.search.list.response.model";
 import { catchError, of } from "rxjs";
 import { YoutubeVideosListResponse } from "../shared/models/youtube.videos.list.response.model";
 
@@ -57,7 +57,6 @@ export class SongSearchService {
     // Construct API request
     const getVideosListUrl = this.YOUTUBE_VIDEOS_LIST_URL
       + '?key=REPLACE_ME'
-      + '&maxWidth=400'
       + '&part=player'
       + `&id=${videoIds.join(',')}`;
 
@@ -67,8 +66,19 @@ export class SongSearchService {
         console.error('Error fetching posts:', error);
         return of([]);
       })
-    ).subscribe(videosList => {
-      this.youtubeVideosListResponse.set(videosList as YoutubeVideosListResponse);
+    ).subscribe(videosListResponse => {
+      videosListResponse = videosListResponse as YoutubeVideosListResponse;
+
+      // Add the snippet field from search response to video response
+      videosListResponse.items.map(videoResource => {
+        const matchingSearchListItem = (this.youtubeSearchListResponse() as YoutubeSearchListResponse).items.find(
+          item => item.id.videoId == videoResource.id
+        ) as YoutubeSearchResource;
+        videoResource.snippet = matchingSearchListItem.snippet;
+        return videoResource;
+      });
+
+      this.youtubeVideosListResponse.set(videosListResponse);
     });
   }
 }

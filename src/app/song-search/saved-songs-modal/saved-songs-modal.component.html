@@ -1,0 +1,20 @@
+<h2 class="mat-typography" mat-dialog-title>Saved Songs</h2>
+<mat-dialog-content class="mat-typography">
+
+  @if (savedVideos.length != 0) {
+    <!-- Video List -->
+    <app-video-list [videosList]="savedVideos"
+                    [(savedVideos)]="savedVideos"/>
+  }
+  @else {
+    <div class="no-videos-description">
+      You don't have any saved videos!
+    </div>
+  }
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>
+

@@ -21,7 +21,7 @@ export interface YoutubeSearchResource {
     playlistId: string;
   };
   snippet: {
-    publishedAt: Date;
+    publishedAt: string;
     channelId: string;
     title: string;
     description: string;

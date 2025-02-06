@@ -1,0 +1,53 @@
+<!-- Search Results -->
+<div class="search-result-list mat-typography">
+  @for (video of videosList; track video.player.embedHtml; let index = $index; let count = $count) {
+
+    <!-- Search Result Item -->
+    <mat-card class="video-card" [class.card-bottom-margin]="index < count - 1">
+      <mat-card-content class="card-content">
+
+        <!-- Video Player (Left Side) -->
+        <div class="player-container" [innerHTML]="video.player.embedHtml | sanitizeHtml"></div>
+
+        <!-- Video Information (Right Side) -->
+        <div class="video-info-container">
+          <div class="space-between-container">
+            <div>
+              <div class="child-container">
+
+                <!-- Video Title -->
+                <div class="child-margin-top" [innerHTML]="video.snippet.title"></div>
+              </div>
+            </div>
+
+            <div>
+              <mat-divider/>
+              <div class="child-container color-grey">
+
+                <!-- Channel Title -->
+                <mat-icon class="channel-icon">account_box</mat-icon>
+                <div class="channel-title" [innerHTML]="video.snippet.channelTitle"></div>
+
+                <!-- Video Publish Date -->
+                <mat-icon class="date-icon">calendar_month</mat-icon>
+                <div class="publish-date">{{video.snippet.publishedAt | convertDate}}</div>
+
+                <!-- Save/Unsave Video Buttons -->
+                @if (isVideoSaved(video)) {
+                  <button mat-icon-button class="save-unsave-button" color="warn" type='button' (click)="handleUnsaveVideo(video)">
+                    <mat-icon>playlist_remove</mat-icon>
+                  </button>
+                }
+                @else {
+                  <button mat-icon-button class="save-unsave-button" color="primary" type='button' (click)="handleSaveVideo(video)">
+                    <mat-icon>playlist_add</mat-icon>
+                  </button>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

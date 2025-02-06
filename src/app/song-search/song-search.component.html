@@ -1,6 +1,6 @@
 <div class="medium-margin">
-
   <div class="search-controls-container">
+
     <!-- Song Title Search Bar -->
     <mat-form-field class="search-input-container" subscriptSizing="dynamic">
       <mat-label>Song Title</mat-label>
@@ -17,23 +17,18 @@
         <mat-icon>clear</mat-icon>
       </button>
     </mat-form-field>
+
+    <!-- Show Saved Videos Button -->
+    <button class="show-saved-videos-button no-shadow" mat-fab color="primary" type='button' (click)="handleShowSavedVideos()">
+      <mat-icon>playlist_add_check</mat-icon>
+    </button>
   </div>
 
   @if (songSearchService.youtubeVideosListResponse(); as listResponse) {
-    <!-- Search Results -->
-    <mat-list class="search-result-list" role="list">
-      @for (video of listResponse.items | slice:getStartIndexOfPage():getEndIndexOfPage();
-        track video.player.embedHtml; let index = $index; let count = $count) {
-        <!-- Search Result Item -->
-        <mat-list-item class="search-result-list-item" role="listitem">
-          <div [innerHTML]="video.player.embedHtml | sanitizeHtml"></div>
-        </mat-list-item>
 
-        @if (index < count - 1) {
-          <mat-divider/>
-        }
-      }
-    </mat-list>
+    <!-- Video List -->
+    <app-video-list [videosList]="listResponse.items | slice:pageStartIndex():pageEndIndex()"
+                    [(savedVideos)]="savedVideos"/>
 
     <!-- Paginator -->
     <mat-paginator [length]="listResponse.pageInfo.totalResults" [pageSize]="resultsPerPage"
@@ -41,8 +36,9 @@
                    aria-label="Select page"/>
 
   } @else if (searchButtonClicked) {
+
     <!-- Loading indicator -->
-    <div class="search-result-list centered" role="list">
+    <div class="centered-spinner" role="list">
       <mat-spinner/>
     </div>
   }
