@@ -24,14 +24,16 @@ export class SongSearchService {
 
   public getSearchList(query: string | null): void {
     // Construct API request
-    const getSearchListUrl = this.YOUTUBE_SEARCH_LIST_URL
-      + '?key=REPLACE_ME'
+    const getSearchListUrl = encodeURI(
+      this.YOUTUBE_SEARCH_LIST_URL
+      + '?part=snippet'
+      + '&key=REPLACE_ME'
       + '&videoEmbeddable=true'
-      + `&q=${query ?? ""}`
+      + '&type=video'
       + '&regionCode=US'
       + '&maxResults=50'
-      + '&part=snippet'
-      + '&type=video';
+      + `&q=${query}`
+    );
 
     // Retrieve list of embeddable YouTube videos that match search query
     this.http.get<YoutubeSearchListResponse>(getSearchListUrl).pipe(
@@ -55,10 +57,12 @@ export class SongSearchService {
 
   public getVideosList(videoIds: string[]): void {
     // Construct API request
-    const getVideosListUrl = this.YOUTUBE_VIDEOS_LIST_URL
+    const getVideosListUrl = encodeURI(
+      this.YOUTUBE_VIDEOS_LIST_URL
       + '?key=REPLACE_ME'
       + '&part=player'
-      + `&id=${videoIds.join(',')}`;
+      + `&id=${videoIds.join(',')}`
+    );
 
     // Retrieve list of YouTube video <Iframes> that match the VideoIds
     this.http.get<YoutubeVideosListResponse>(getVideosListUrl).pipe(

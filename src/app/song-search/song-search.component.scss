@@ -1,10 +1,21 @@
-.medium-margin {
-  padding-top: 2vh;
+.song-search-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 }
 
 .search-controls-container {
-  margin-bottom: 2vh;
-  margin-left: 0.1rem;
+  margin: 1rem 0 1rem 0.1rem;
+}
+
+.video-list {
+  min-height: 120px;
+  flex-grow: 1;
+}
+
+.paginator {
+  min-height: 56px;
 }
 
 .search-input-container {
@@ -30,9 +41,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 57vh;
+  height: 100%;
   margin-bottom: 0.5rem;
-  overflow: auto;
 }
 
 .show-saved-videos-button {

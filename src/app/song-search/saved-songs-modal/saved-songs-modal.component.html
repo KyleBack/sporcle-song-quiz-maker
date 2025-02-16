@@ -1,5 +1,5 @@
 <h2 class="mat-typography" mat-dialog-title>Saved Songs</h2>
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content class="content-container mat-typography" [class.min-width]="savedVideos.length != 0">
 
   @if (savedVideos.length != 0) {
     <!-- Video List -->

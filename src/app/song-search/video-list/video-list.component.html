@@ -25,12 +25,16 @@
               <div class="child-container color-grey">
 
                 <!-- Channel Title -->
-                <mat-icon class="channel-icon">account_box</mat-icon>
-                <div class="channel-title" [innerHTML]="video.snippet.channelTitle"></div>
+                <div class="channel-title-container">
+                  <mat-icon class="channel-icon">account_box</mat-icon>
+                  <div class="channel-title" [innerHTML]="video.snippet.channelTitle"></div>
+                </div>
 
                 <!-- Video Publish Date -->
-                <mat-icon class="date-icon">calendar_month</mat-icon>
-                <div class="publish-date">{{video.snippet.publishedAt | convertDate}}</div>
+                <div class="publish-date-container">
+                  <mat-icon class="date-icon">calendar_month</mat-icon>
+                  <div class="publish-date">{{video.snippet.publishedAt | convertDate}}</div>
+                </div>
 
                 <!-- Save/Unsave Video Buttons -->
                 @if (isVideoSaved(video)) {

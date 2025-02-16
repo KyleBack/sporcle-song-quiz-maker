@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "prod": "sporcle-song-quiz-maker",
+    "default": "sporcle-song-quiz-maker"
+  },
+  "targets": {},
+  "etags": {}
+}

@@ -11,17 +11,15 @@ import { MatDivider } from "@angular/material/divider";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { SlicePipe } from "@angular/common";
-import {YoutubeVideoResource} from "../shared/models/youtube.videos.list.response.model";
-import {MatDialog} from "@angular/material/dialog";
-import {SavedSongsModalComponent} from "./saved-songs-modal/saved-songs-modal.component";
-import {MatCard, MatCardContent} from "@angular/material/card";
-import {ConvertDatePipe} from "../shared/pipes/convert-date.pipe";
-import {VideoListComponent} from "./video-list/video-list.component";
+import { YoutubeVideoResource} from "../shared/models/youtube.videos.list.response.model";
+import { MatDialog} from "@angular/material/dialog";
+import { SavedSongsModalComponent } from "./saved-songs-modal/saved-songs-modal.component";
+import { VideoListComponent } from "./video-list/video-list.component";
 
 @Component({
   selector: 'app-song-search',
   standalone: true,
-  imports: [MatFormField, MatInput, MatLabel, ReactiveFormsModule, MatSuffix, MatIcon, MatIconButton, SanitizeHtmlPipe, MatList, MatListItem, MatDivider, MatProgressSpinner, MatPaginator, SlicePipe, MatFabButton, MatCard, MatCardContent, ConvertDatePipe, VideoListComponent],
+  imports: [MatFormField, MatInput, MatLabel, ReactiveFormsModule, MatSuffix, MatIcon, MatIconButton, MatProgressSpinner, MatPaginator, SlicePipe, MatFabButton, VideoListComponent],
   templateUrl: './song-search.component.html',
   styleUrl: './song-search.component.scss'
 })

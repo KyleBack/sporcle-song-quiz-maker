@@ -1,4 +1,4 @@
-<div class="medium-margin">
+<div class="song-search-container">
   <div class="search-controls-container">
 
     <!-- Song Title Search Bar -->
@@ -27,11 +27,13 @@
   @if (songSearchService.youtubeVideosListResponse(); as listResponse) {
 
     <!-- Video List -->
-    <app-video-list [videosList]="listResponse.items | slice:pageStartIndex():pageEndIndex()"
+    <app-video-list class="video-list"
+                    [videosList]="listResponse.items | slice:pageStartIndex():pageEndIndex()"
                     [(savedVideos)]="savedVideos"/>
 
     <!-- Paginator -->
-    <mat-paginator [length]="listResponse.pageInfo.totalResults" [pageSize]="resultsPerPage"
+    <mat-paginator class="paginator"
+                   [length]="listResponse.pageInfo.totalResults" [pageSize]="resultsPerPage"
                    [pageSizeOptions]="resultsPerPageOptions" (page)="handlePageEvent($event)"
                    aria-label="Select page"/>
 
@@ -42,7 +44,6 @@
       <mat-spinner/>
     </div>
   }
-
 </div>
 
 
