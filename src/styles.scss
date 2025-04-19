@@ -4,23 +4,44 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-horizontal-stepper-wrapper {
-  height: 100% !important;
+  //height: 100% !important;
+}
+
+.mat-horizontal-stepper-header-container {
+  margin-bottom: 1% !important;
 }
 
 .mat-horizontal-content-container {
   padding: 0 !important;
-  height: 100% !important;
+  //height: 100% !important;
 }
 
-.mat-horizontal-stepper-content {
-  height: 100% !important;
+.mat-horizontal-stepper-content:not(.mat-horizontal-stepper-content-inactive) {
+  //height: 100% !important;
 }
 
 .mat-mdc-dialog-content {
   padding-right: 0 !important;
 }
 
+.mat-mdc-paginator-container {
+  padding: 0 !important;
+}
+
 .full-height {
   height: 100%;
   display: block;
 }
+
+.mat-step-icon-state-edit {
+  background-color: darkorange !important;
+}
+
+.mat-step-icon-selected {
+  background-color: darkorange !important;
+}
+
+.mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+

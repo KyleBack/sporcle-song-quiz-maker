@@ -1,10 +1,9 @@
-<h2 class="mat-typography" mat-dialog-title>Saved Songs</h2>
-<mat-dialog-content class="content-container mat-typography" [class.min-width]="savedVideos.length != 0">
+<h2 class="mat-typography" mat-dialog-title>Saved Videos</h2>
+<mat-dialog-content class="content-container mat-typography" [class.min-width]="savedVideosService.savedVideos.length !== 0">
 
-  @if (savedVideos.length != 0) {
+  @if (savedVideosService.savedVideos.length !== 0) {
     <!-- Video List -->
-    <app-video-list [videosList]="savedVideos"
-                    [(savedVideos)]="savedVideos"/>
+    <app-video-list [videosList]="savedVideosService.savedVideos" [showVideoPlayer]="false"/>
   }
   @else {
     <div class="no-videos-description">

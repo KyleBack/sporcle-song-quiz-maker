@@ -6,15 +6,16 @@
 }
 
 .search-controls-container {
-  margin: 1rem 0 1rem 0.1rem;
+  margin: 0 0 1rem 0.1rem;
 }
 
 .video-list {
-  min-height: 120px;
+  height: 1px; /* new */
   flex-grow: 1;
 }
 
 .paginator {
+  padding-top: 1rem;
   min-height: 56px;
 }
 

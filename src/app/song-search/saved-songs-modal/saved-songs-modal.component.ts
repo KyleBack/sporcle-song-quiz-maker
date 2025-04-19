@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from "@angular/material/dialog";
 import { MatButton } from "@angular/material/button";
-import { YoutubeVideoResource } from "../../shared/models/youtube.videos.list.response.model";
 import { VideoListComponent } from "../video-list/video-list.component";
+import { SavedVideosService } from "../../shared/services/saved-videos.service";
 
 @Component({
   selector: 'app-saved-songs-modal',
@@ -20,6 +20,5 @@ import { VideoListComponent } from "../video-list/video-list.component";
 })
 export class SavedSongsModalComponent {
 
-  @Input()
-  savedVideos: YoutubeVideoResource[] = [];
+  constructor(protected savedVideosService: SavedVideosService) {}
 }

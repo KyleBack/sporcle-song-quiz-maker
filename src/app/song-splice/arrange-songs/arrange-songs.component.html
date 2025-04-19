@@ -1,0 +1,54 @@
+<div class="song-splice-container mat-typography">
+
+  <!-- Column Headers -->
+  <div class="drag-drop-item header-item">
+    <div class="drag-icon-container"></div>
+    <div class="video-number-container">Order</div>
+    <div class="video-title-container">Video Title</div>
+    <div class="controls-container">
+      <div class="video-duration-button left-align">Clip Duration</div>
+      <mat-icon class="status-icon hidden">check</mat-icon>
+    </div>
+  </div>
+
+  <!-- Drag & Drop List -->
+  <div cdkDropList
+       class="drag-drop-list"
+       [cdkDropListData]="savedVideosService.savedVideos"
+       (cdkDropListDropped)="handleDrop($event)">
+
+    @for (video of savedVideosService.savedVideos; track video.snippet.title; let index=$index) {
+
+      <!-- Drag & Drop Item -->
+      <div class="drag-drop-item movable" [class.green-background]="video.isClipEdited" cdkDrag>
+
+        <!-- Drag & Drop Icon -->
+        <div class="drag-icon-container">
+          <mat-icon>drag_indicator</mat-icon>
+        </div>
+
+        <!-- Video Order Number -->
+        <div class="video-number-container"> {{index + 1}} </div>
+
+        <!-- Video Title -->
+        <div class="video-title-container" [innerHTML]="video.snippet.title"></div>
+
+        <div class="controls-container">
+
+          <!-- Edit Clip Duration Button -->
+          <button class="video-duration-button" mat-stroked-button matSuffix color="primary" (click)="handleTrimVideo(video.id)">
+            <div>
+              {{video.startTime | convertSecondsToTimestamp:false}}
+              -
+              {{video.endTime | convertSecondsToTimestamp:false}}
+            </div>
+            <mat-icon class="edit-duration-icon">edit</mat-icon>
+          </button>
+
+          <!-- Status Icon -->
+          <mat-icon class="status-icon green" [class.hidden]="!video.isClipEdited">check</mat-icon>
+        </div>
+      </div>
+    }
+  </div>
+</div>

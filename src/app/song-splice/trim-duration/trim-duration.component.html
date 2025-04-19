@@ -1,0 +1,59 @@
+<div class="trim-duration-container">
+
+  <mat-card class="container">
+
+    <!-- Header -->
+    <mat-card-header>
+      <mat-card-title>Trim Clip Duration</mat-card-title>
+    </mat-card-header>
+
+    <mat-divider class="divider-spacing"/>
+
+    <mat-card-content>
+      <!-- Clip Player -->
+      <youtube-player
+        width="750"
+        class="player-container"
+        disablePlaceholder="true"
+        [videoId]="selectedVideo?.id"
+        [startSeconds]="clipStartSeconds"
+        [endSeconds]="clipEndSeconds">
+      </youtube-player>
+
+      <div class="clip-duration-controls">
+
+        <!-- Clip Start Time -->
+        <button class="clip-duration-button" mat-stroked-button color="primary" (click)="handleUpdateStartTime()">
+          Update Start Time
+          <mat-card-subtitle>{{ clipStartSeconds | convertSecondsToTimestamp:true }}s</mat-card-subtitle>
+        </button>
+
+        <!-- Play Button -->
+        <button class="play-button" mat-stroked-button color="accent" (click)="handlePlayClip()">
+          <mat-icon>play_arrow</mat-icon>
+          Play Clip
+        </button>
+
+        <!-- Clip End Time -->
+        <button class="clip-duration-button" mat-stroked-button color="primary" (click)="handleUpdateEndTime()">
+          Update End Time
+          <mat-card-subtitle>{{ clipEndSeconds | convertSecondsToTimestamp:true }}s</mat-card-subtitle>
+        </button>
+      </div>
+    </mat-card-content>
+
+    <mat-divider class="divider-spacing"/>
+
+    <mat-card-footer class="footer">
+      <!-- Cancel Button -->
+      <button class="cancel-button" mat-flat-button color="warn" (click)="handleNavigateBack()">
+        Cancel
+      </button>
+
+      <!-- Save Button -->
+      <button class="save-button" mat-flat-button color="primary" (click)="handleSaveTimes()">
+        Save Clip
+      </button>
+    </mat-card-footer>
+  </mat-card>
+</div>

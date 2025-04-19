@@ -1,19 +1,39 @@
+<!-- App Banner -->
 <div class="app-banner">
   <div class="title"> Sporcle Song Quiz Maker </div>
 </div>
 
-<mat-stepper class="stepper" labelPosition="end" (selectionChange)="handleStepChange($event)">
-  <mat-step [label]="SEARCH_LABEL">
-    <app-song-search class="full-height"/>
-  </mat-step>
-  <mat-step [label]="TRIM_LABEL">
-    <app-song-trim/>
-  </mat-step>
-  <mat-step [label]="UPLOAD_LABEL">
-    <app-song-upload/>
-  </mat-step>
-</mat-stepper>
+<div class="app-content-container">
+  <!-- Stepper Labels -->
+  <mat-stepper #stepper labelPosition="end" [selectedIndex]="stepperIndex" (selectionChange)="handleStepChange($event)" color="primary">
+    @for (label of STEP_LABEL_ORDER; track label) {
+      <mat-step [label]="label" [routerLink]="LABEL_TO_ROUTE.get(label)">
+      </mat-step>
+    }
+  </mat-stepper>
 
+  <!-- Stepper Content -->
+  <div class="router-content">
+    <router-outlet></router-outlet>
+  </div>
 
+  <!-- Stepper Controls -->
+  <div class="stepper-controls-container">
+
+    <!-- Previous Step Button -->
+    <button class="previous-stepper-button" mat-button (click)="handlePreviousStep()"
+            [class.hidden]="!previousStepLabel()">
+      <mat-icon>chevron_left</mat-icon>
+      <div class="right-padding">{{ previousStepLabel() }}</div>
+    </button>
+
+    <!-- Next Step Button -->
+    <button class="next-stepper-button" mat-button (click)="handleNextStep()"
+            [class.hidden]="!nextStepLabel()" [disabled]="!canUserProgress()">
+      <mat-icon iconPositionEnd>chevron_right</mat-icon>
+      <div class="left-padding">{{ nextStepLabel() }}</div>
+    </button>
+  </div>
+</div>
 
 

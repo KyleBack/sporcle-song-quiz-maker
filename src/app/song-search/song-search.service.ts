@@ -1,8 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { YoutubeSearchListResponse, YoutubeSearchResource } from "../shared/models/youtube.search.list.response.model";
+import { YoutubeSearchListResponse, YoutubeSearchResource } from "../shared/models/responses/youtube.search.list.response.model";
 import { catchError, of } from "rxjs";
-import { YoutubeVideosListResponse } from "../shared/models/youtube.videos.list.response.model";
+import { YoutubeVideosListResponse } from "../shared/models/responses/youtube.videos.list.response.model";
+import { parse, toSeconds } from 'iso8601-duration';
 
 @Injectable({
   providedIn: 'root'
@@ -31,14 +32,14 @@ export class SongSearchService {
       + '&videoEmbeddable=true'
       + '&type=video'
       + '&regionCode=US'
+      + '&safeSearch=moderate'
       + '&maxResults=50'
       + `&q=${query}`
     );
 
     // Retrieve list of embeddable YouTube videos that match search query
     this.http.get<YoutubeSearchListResponse>(getSearchListUrl).pipe(
-      catchError(error => {
-        console.error('Error fetching posts:', error);
+      catchError(() => {
         return of([]);
       })
     ).subscribe(searchListResponse => {
@@ -60,25 +61,30 @@ export class SongSearchService {
     const getVideosListUrl = encodeURI(
       this.YOUTUBE_VIDEOS_LIST_URL
       + '?key=REPLACE_ME'
-      + '&part=player'
+      + '&part=player,contentDetails'
       + `&id=${videoIds.join(',')}`
     );
 
     // Retrieve list of YouTube video <Iframes> that match the VideoIds
     this.http.get<YoutubeVideosListResponse>(getVideosListUrl).pipe(
       catchError(error => {
-        console.error('Error fetching posts:', error);
         return of([]);
       })
     ).subscribe(videosListResponse => {
       videosListResponse = videosListResponse as YoutubeVideosListResponse;
 
-      // Add the snippet field from search response to video response
       videosListResponse.items.map(videoResource => {
+        // Add the snippet field from search response to video response
         const matchingSearchListItem = (this.youtubeSearchListResponse() as YoutubeSearchListResponse).items.find(
           item => item.id.videoId == videoResource.id
         ) as YoutubeSearchResource;
         videoResource.snippet = matchingSearchListItem.snippet;
+
+        // Initialize splice detail values
+        videoResource.startTime = 0;
+        videoResource.endTime = toSeconds(parse(videoResource.contentDetails.duration));
+        videoResource.isClipEdited = false;
+
         return videoResource;
       });
 

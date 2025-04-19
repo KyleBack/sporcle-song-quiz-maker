@@ -8,7 +8,8 @@
              spellcheck="false" [formControl]="searchQueryInput" (keyup.enter)="handleSearch()">
 
       <!-- Submit Button -->
-      <button class="search-button" mat-icon-button matSuffix color="primary" type='button' (click)="handleSearch()">
+      <button class="search-button" mat-icon-button matSuffix color="primary" type='button' (click)="handleSearch()"
+              [disabled]="loadingService.isLoading()">
         <mat-icon>search</mat-icon>
       </button>
 
@@ -29,7 +30,7 @@
     <!-- Video List -->
     <app-video-list class="video-list"
                     [videosList]="listResponse.items | slice:pageStartIndex():pageEndIndex()"
-                    [(savedVideos)]="savedVideos"/>
+                    [showVideoPlayer]="true"/>
 
     <!-- Paginator -->
     <mat-paginator class="paginator"
@@ -37,7 +38,7 @@
                    [pageSizeOptions]="resultsPerPageOptions" (page)="handlePageEvent($event)"
                    aria-label="Select page"/>
 
-  } @else if (searchButtonClicked) {
+  } @else if (loadingService.isLoading()) {
 
     <!-- Loading indicator -->
     <div class="centered-spinner" role="list">

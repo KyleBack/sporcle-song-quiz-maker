@@ -29,4 +29,15 @@ export interface YoutubeVideoResource {
     channelTitle: string;
     liveBroadcastContent: string;
   };
+  contentDetails: {
+    duration: string;
+    dimension: string;
+    definition: string;
+    caption: string;
+    licensedContent: boolean;
+  }
+  spliceOffset: number;
+  startTime: number;
+  endTime: number;
+  isClipEdited: boolean;
 }

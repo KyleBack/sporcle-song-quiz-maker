@@ -7,7 +7,9 @@
       <mat-card-content class="card-content">
 
         <!-- Video Player (Left Side) -->
-        <div class="player-container" [innerHTML]="video.player.embedHtml | sanitizeHtml"></div>
+        @if (showVideoPlayer) {
+          <youtube-player class="player-container" [videoId]="video.id" width="600"></youtube-player>
+        }
 
         <!-- Video Information (Right Side) -->
         <div class="video-info-container">
