@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { YoutubeVideoResource } from "../models/responses/youtube.videos.list.response.model";
+import { DOCUMENT } from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class StorageService {
 
   readonly SAVED_VIDEOS_STORAGE_KEY = "savedVideos";
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private document: Document) {
     this.sessionStorage = document.defaultView?.sessionStorage;
   }
 
