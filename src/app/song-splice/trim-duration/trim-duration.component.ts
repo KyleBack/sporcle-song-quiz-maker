@@ -9,7 +9,7 @@ import { MatButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import {
   MatCard,
-  MatCardContent,
+  MatCardContent, MatCardFooter,
   MatCardHeader,
   MatCardSubtitle,
   MatCardTitle
@@ -32,7 +32,8 @@ import Utils from "../../shared/utils/utils";
     MatCardHeader,
     MatCardContent,
     MatDivider,
-    MatCardSubtitle
+    MatCardSubtitle,
+    MatCardFooter
   ],
   templateUrl: './trim-duration.component.html',
   styleUrl: './trim-duration.component.scss'
