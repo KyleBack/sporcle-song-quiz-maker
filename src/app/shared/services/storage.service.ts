@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {Inject, Injectable } from '@angular/core';
 import { YoutubeVideoResource } from "../models/responses/youtube.videos.list.response.model";
 import { DOCUMENT } from "@angular/common";
 
