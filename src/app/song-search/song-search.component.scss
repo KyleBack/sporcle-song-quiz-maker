@@ -1,0 +1,51 @@
+.song-search-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.search-controls-container {
+  margin: 0 0 1rem 0.1rem;
+}
+
+.video-list {
+  height: 1px; /* new */
+  flex-grow: 1;
+}
+
+.paginator {
+  padding-top: 1rem;
+  min-height: 56px;
+}
+
+.search-input-container {
+  width: 24rem;
+  height: 3.5rem;
+  vertical-align: bottom;
+}
+
+.search-button {
+  margin: 0.25rem 0 0.25rem 0.25rem;
+}
+
+.clear-button {
+  margin: 0.25rem 0.25rem 0.25rem 0;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+.centered-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.show-saved-videos-button {
+  float: right;
+}

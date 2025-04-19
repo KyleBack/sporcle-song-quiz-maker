@@ -1,0 +1,67 @@
+.song-upload-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+}
+
+.arrow-icon-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 20px;
+
+  .arrow-icon {
+    transform: scale(2);
+  }
+}
+
+.card {
+  width: 75%;
+  flex-grow: 1;
+  padding: 15px;
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.disabled-title {
+  color: gray;
+}
+
+.disabled {
+  background-color: lightgray;
+}
+
+.splice-offset-container {
+  display: flex;
+  flex-direction: row;
+
+  .splice-offset-slider {
+    width: 175px;
+  }
+}
+
+.spacer {
+  width: 1%;
+}
+
+.generate-controls-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.generate-audio-button {
+  height: 57px;
+  width: 150px;
+  font-size: 1.10rem;
+}
+
+

@@ -1,0 +1,50 @@
+<div class="song-search-container">
+  <div class="search-controls-container">
+
+    <!-- Song Title Search Bar -->
+    <mat-form-field class="search-input-container" subscriptSizing="dynamic">
+      <mat-label>Song Title</mat-label>
+      <input class="search-input" matInput type="text" placeholder="Ex. Party in the USA - Miley Cyrus"
+             spellcheck="false" [formControl]="searchQueryInput" (keyup.enter)="handleSearch()">
+
+      <!-- Submit Button -->
+      <button class="search-button" mat-icon-button matSuffix color="primary" type='button' (click)="handleSearch()"
+              [disabled]="loadingService.isLoading()">
+        <mat-icon>search</mat-icon>
+      </button>
+
+      <!-- Clear Button -->
+      <button class="clear-button" mat-icon-button matSuffix color="primary" (click)="handleClear()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- Show Saved Videos Button -->
+    <button class="show-saved-videos-button no-shadow" mat-fab color="primary" type='button' (click)="handleShowSavedVideos()">
+      <mat-icon>playlist_add_check</mat-icon>
+    </button>
+  </div>
+
+  @if (songSearchService.youtubeVideosListResponse(); as listResponse) {
+
+    <!-- Video List -->
+    <app-video-list class="video-list"
+                    [videosList]="listResponse.items | slice:pageStartIndex():pageEndIndex()"
+                    [showVideoPlayer]="true"/>
+
+    <!-- Paginator -->
+    <mat-paginator class="paginator"
+                   [length]="listResponse.pageInfo.totalResults" [pageSize]="resultsPerPage"
+                   [pageSizeOptions]="resultsPerPageOptions" (page)="handlePageEvent($event)"
+                   aria-label="Select page"/>
+
+  } @else if (loadingService.isLoading()) {
+
+    <!-- Loading indicator -->
+    <div class="centered-spinner" role="list">
+      <mat-spinner/>
+    </div>
+  }
+</div>
+
+

@@ -1,0 +1,60 @@
+<div class="song-upload-container">
+
+  <mat-card class="card">
+    <mat-card-title>Generate Audio File</mat-card-title>
+    <mat-card-content class="card-content">
+
+      <div class="generate-controls-container">
+        <!-- Splice Offset Selector -->
+        <mat-form-field>
+          <mat-label>Seconds between clips</mat-label>
+          <mat-select [(value)]="selectedSpliceOffset">
+            @for (option of spliceOffsetOptions; track option) {
+              <mat-option [value]="option">{{ option }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <div class="spacer"></div>
+
+        <!-- Generate Audio File Button -->
+        <button mat-flat-button
+                class="generate-audio-button"
+                color="primary"
+                [disabled]="loadingService.isLoading()"
+                (click)="handleGenerateAudioFile()">
+          Generate
+        </button>
+      </div>
+
+      <br/>
+
+      @if (audioSplicerService.getSplicedAudioBlobResponse(); as audioUrl) {
+        <!-- Audio File Player/Downloader -->
+        <audio controls>
+          <source [src]="audioUrl" type="audio/mp4">
+          Your browser does not support the audio element.
+        </audio>
+      }
+
+      @if (loadingService.isLoading()) {
+        <!-- Loading indicator -->
+        <div class="centered-spinner" role="list">
+          <mat-spinner/>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+
+  <div class="arrow-icon-container">
+    <mat-icon class="arrow-icon">arrow_downward</mat-icon>
+  </div>
+
+  <mat-card class="card disabled">
+    <mat-card-title class="disabled-title">Upload to SoundCloud</mat-card-title>
+    <mat-card-content class="card-content">
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
